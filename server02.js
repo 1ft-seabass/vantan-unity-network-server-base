@@ -7,23 +7,19 @@ const app = express();
 // /index.html や / の場合は public フォルダ内の index.html が表示されます
 app.use(express.static(__dirname + '/public'));
 
-// bodyParser の設定
-// ※現在はひとまず置いておけばよい処理
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-
-// /api/get/sample というパスで GET リクエストでアクセスすると GET OK! が表示されます
+// /api/get/sample というパスで GET リクエストでアクセスすると GET OK! が取得できます
+// GET リクエストなのでブラウザから見れます
 app.get('/api/get/sample', (req, res) => {
   res.send('GET OK!')
 });
 
-// /api/post/sample というパスで POST リクエストでアクセスすると POST OK! が表示されます
+// /api/post/sample というパスで POST リクエストでアクセスすると POST OK! が取得できます
 app.post('/api/post/sample', (req, res) => {
   res.send('POST OK!')
 });
 
 // サーバーを 8080 ポートで起動してログを出力
 app.listen(process.env.PORT || 8080, () => {
-  console.log("server01 start!");
+  console.log("server02 start!");
   console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
 })
