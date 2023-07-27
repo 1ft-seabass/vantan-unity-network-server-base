@@ -3,19 +3,19 @@ const app = express();
 
 app.use(express.static(__dirname + '/public'));
 
-// bodyParser
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
+app.post('/api/post/json', (req, res) => {
 
-app.get('/api/get/sample', (req, res) => {
-  res.json({"result":"GET OK!"})
-});
-
-app.post('/api/post/sample', (req, res) => {
-  res.json({"result":"POST OK!"})
+  // 送るデータを JavaScript のオブジェクトで作る
+  const responseData = {
+    "welcome":"こんにちは！ようこそ！",
+    "add_point":1,
+  };
+  // res.json はオブジェクトをJSON 形式で返答する
+  // 以前のテキスト返答は res.send(文字列) を使っていました
+  res.json(responseData)
 });
 
 app.listen(process.env.PORT || 8080, () => {
-  console.log("server02 start!");
+  console.log("server04 start!");
   console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
 })
