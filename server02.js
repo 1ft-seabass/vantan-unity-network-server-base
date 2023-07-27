@@ -10,11 +10,13 @@ app.use(express.static(__dirname + '/public'));
 // /api/get/sample というパスで GET リクエストでアクセスすると GET OK! が取得できます
 // GET リクエストなのでブラウザから見れます
 app.get('/api/get/sample', (req, res) => {
+  console.log('GET Response!');
   res.send('GET OK!')
 });
 
 // /api/post/sample というパスで POST リクエストでアクセスすると POST OK! が取得できます
 app.post('/api/post/sample', (req, res) => {
+  console.log('POST Response!');
   res.send('POST OK!')
 });
 
