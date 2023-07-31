@@ -15,6 +15,6 @@ app.get('/api/get/json', (req, res) => {
 });
 
 app.listen(process.env.PORT || 8080, () => {
-  console.log("server04 start!");
+  console.log("term1-2-chapter03 start!");
   console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
 })

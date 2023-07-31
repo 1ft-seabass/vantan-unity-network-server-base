@@ -23,6 +23,6 @@ app.post('/api/post/add_point', (req, res) => {
 
 // サーバーを 8080 ポートで起動してログを出力
 app.listen(process.env.PORT || 8080, () => {
-  console.log("server03 start!");
+  console.log("term1-2-chapter02 start!");
   console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
 })
