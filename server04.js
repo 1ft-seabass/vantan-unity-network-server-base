@@ -3,10 +3,11 @@ const app = express();
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/api/get/json1', (req, res) => {
+app.get('/api/get/json', (req, res) => {
   // 送るデータを JavaScript のオブジェクトで作る
   const responseData = {
-    "name":"Box1"
+    "name":"Box1",
+    "name2":"Box2"
   };
   // res.json はオブジェクトを JSON 形式で返答します
   // 以前のテキスト返答は res.send(文字列) を使っていました
