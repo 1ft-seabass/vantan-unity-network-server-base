@@ -1,4 +1,4 @@
-// path ライブラリ
+// path ライブラリの呼び出し
 const path = require('path');
 // Express ライブラリの呼び出し
 const express = require('express');
@@ -11,6 +11,6 @@ app.use(express.static(__dirname + '/public'));
 
 // サーバーを 8080 ポートで起動してログを出力
 app.listen(process.env.PORT || 8080, () => {
-  onsole.log(`${path.basename(__filename)} start!`);
+  console.log(`${path.basename(__filename)} start!`);
   console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
 })
