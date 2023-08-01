@@ -4,6 +4,7 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 
 app.get('/api/get/json', (req, res) => {
+  console.log('/api/get/json 受信');
   // 送るデータを JavaScript のオブジェクトで作る
   const responseData = {
     "name":"Box1",
