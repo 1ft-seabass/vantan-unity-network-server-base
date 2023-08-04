@@ -36,7 +36,7 @@ app.post('/api/post/init', (req, res) => {
   const responseData = {
     "result":"OK",
     "title":title,  // あいさつ文
-    "add_point":1,  // 加算ポイント
+    "add_point":54,  // 加算ポイント
     "recordPoint":recordPoint // 記録している現在のポイント
   };
   // res.json はオブジェクトを JSON 形式で返答します
