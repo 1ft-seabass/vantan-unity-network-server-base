@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 // データを JSON データとして受け取る処理
 app.use(express.json())
 
-// /api/post/result というパスで POST リクエストでアクセスするとデータが取得できます
+// /api/post/result というパスで POST リクエストでアクセスするとポイントデータが保存できます
 app.post('/api/post/result', async (req, res) => {
   console.log('/api/post/result 受信');
   // 受信したデータを表示

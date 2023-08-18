@@ -10,8 +10,6 @@ const Airtable = require('airtable');
 const AIRTABLE_API_KEY = 'AIRTABLE_API_KEY';
 // Airtable BASE ID
 const AIRTABLE_BASE_ID = 'AIRTABLE_BASE_ID';
-// Airtable Table 名
-const AIRTABLE_TABLE_NAME = 'Sample02';
 
 // 今回 Base を読み込む設定
 const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
@@ -32,16 +30,16 @@ app.use(express.urlencoded({ extended: true }));
 // データを JSON データとして受け取る処理
 app.use(express.json())
 
-// /api/get というパスで GET リクエストでアクセスするとデータが取得できます
-app.get('/api/get', async (req, res) => {
-  console.log('/api/get 受信');
+// /api/get/ranking というパスで GET リクエストでアクセスするとランキングデータが取得できます
+app.get('/api/get/ranking', async (req, res) => {
+  console.log('/api/get/ranking 受信');
   // 受信したデータを表示
   console.log(req.query);
 
   // Airtable からデータを取得
   let records;
   try {
-    records = await base(AIRTABLE_TABLE_NAME).select({
+    records = await base('PointList').select({
       // ビューはデータの見せ方のこと今回は最初に作られた Grid view で OK
       view: "Grid view"
     }).all();
@@ -53,11 +51,47 @@ app.get('/api/get', async (req, res) => {
   // 返答データ作成
   let responseData = { "data": [] };
   records.forEach(function (record) {
-    // 今回は Color 列を取得
-    responseData.data.push(record.get('Color'));
+    // ランキングとして取りやすくする JSON データを整備
+    const rankingData = {
+      "Name":record.get('Name'),
+      "Point":record.get('Point'),
+      "CreatedTime":record.get('CreatedTime')
+    }
+    responseData.data.push(rankingData);
   });
 
   // res.json はオブジェクトを JSON 形式で返答します
+  res.json(responseData)
+});
+
+// /api/post/result というパスで POST リクエストでアクセスすると名前とポイントデータが保存できます
+app.post('/api/post/result', async (req, res) => {
+  console.log('/api/post/result 受信');
+  // 受信したデータを表示
+  console.log(req.body);
+
+  // Airtable にデータを保存
+  const currentName = req.body.name;
+  const currentData = req.body.point;
+
+  let result;
+  try {
+    const fields = [
+      {
+        "fields": {
+          "Name":currentName,
+          "Point": currentData
+        }
+      }
+    ];
+
+    result = await base('PointList').create(fields);
+  } catch (e) {
+    console.log(e);
+  }
+  
+  // res.json はオブジェクトを JSON 形式で返答します
+  let responseData = { "result": "OK" };
   res.json(responseData)
 });
 
